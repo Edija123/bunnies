@@ -108,7 +108,7 @@ footer {
     background: rgb(255, 255, 255);
     padding: 10px;
     grid-area: sidebar;
-    display: block; /* always show sidebar on all screens */
+    display: none; /* hide on mobile by default */
 }
 
 .sidebar .feature { 
@@ -117,6 +117,14 @@ footer {
     overflow-wrap: break-word;
     word-break: break-word;
 }
+
+/* Show sidebar on tablet and up */
+@media (min-width: 576px) {
+    .sidebar {
+        display: block; /* visible on tablet and desktop */
+    }
+}
+
 
 /* ==============================
    Tablet Layout (≥576px)
