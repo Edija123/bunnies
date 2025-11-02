@@ -45,11 +45,19 @@ header .tools { grid-area: tools; }
     display: grid;
     grid-template-columns: 1fr;
     grid-gap: 10px;
-    grid-template-areas: "action feature";
+    grid-template-areas: 
+        "feature"
+        "action";
 }
 
 .hero .action { background: rgb(193, 244, 193); grid-area: action; }
-.hero .feature { background: rgb(193, 244, 193); grid-area: feature; display: none; }
+.hero .feature { 
+    background: rgb(193, 244, 193); 
+    grid-area: feature; 
+    display: block; /* always show text */
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
 
 /* Main content */
 main {
@@ -66,9 +74,20 @@ main {
         "listing";
 }
 
-main .feature { background: rgb(232, 198, 203); grid-area: feature; }
+main .feature { 
+    background: rgb(232, 198, 203); 
+    grid-area: feature; 
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
 main .mobile-ad { grid-area: ad; }
-main .listing { background: rgb(232, 198, 203); grid-area: listing; }
+main .listing { 
+    background: rgb(232, 198, 203); 
+    grid-area: listing; 
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
 
 /* Footer */
 footer {
@@ -89,10 +108,15 @@ footer {
     background: BlanchedAlmond;
     padding: 10px;
     grid-area: sidebar;
-    display: none; /* hidden on mobile */
+    display: block; /* always show sidebar on all screens */
 }
 
-.sidebar .feature { background: rgb(255, 208, 136); height: 100%; }
+.sidebar .feature { 
+    background: rgb(255, 208, 136); 
+    height: auto; 
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
 
 /* ==============================
    Tablet Layout (≥576px)
@@ -112,12 +136,7 @@ footer {
     header { grid-template-columns: 1fr 2fr 1fr; grid-template-areas: "brand nav tools"; }
 
     /* Hero Layout */
-    .hero {
-        grid-template-areas:
-            "feature"
-            "action";
-    }
-    .hero .feature { display: block; }
+    .hero { grid-template-areas: "feature" "action"; }
 
     /* Main Layout */
     main {
@@ -128,9 +147,6 @@ footer {
             "listing listing";
     }
 
-    /* Sidebar */
-    .sidebar { display: grid; }
-
     .mobile-ad img { width: 200px; }
 }
 
@@ -139,7 +155,7 @@ footer {
 ============================== */
 @media (min-width: 992px) {
     body {
-        grid-template-columns: 1fr 350px;
+        grid-template-columns: 2fr 1fr; /* main content wider than sidebar */
         grid-template-rows: auto auto 1fr auto;
         grid-template-areas:
             "header header"
@@ -149,29 +165,21 @@ footer {
     }
 
     /* Hero Layout */
-    .hero {
-        grid-template-columns: 2fr 1fr;
-        grid-template-areas:
-            "feature action";
+    .hero { 
+        grid-template-columns: 2fr 1fr; 
+        grid-template-areas: "feature action"; 
     }
 
     /* Main Layout */
-    main {
-        grid-template-columns: 1fr 2fr;
-        grid-template-rows: 1fr;
-        grid-template-areas:
-            "feature listing";
+    main { 
+        grid-template-columns: 1fr 2fr; 
+        grid-template-rows: 1fr; 
+        grid-template-areas: "feature listing"; 
     }
 
     /* Ads */
     .mobile-ad { display: none; }
     .desktop-ad { display: block; }
-
-    /* Show sidebar */
-    .sidebar { display: grid; }
-
-    /* Ensure hero feature is visible */
-    .hero .feature { display: block; }
 }
 
 /* ==============================
