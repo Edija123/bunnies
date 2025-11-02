@@ -1,96 +1,233 @@
-/* Basic setup */
+/* Define all sections */
 body {
-  margin: 0;
-  font‑family: Arial, sans‑serif;
-  background‑color: #ffffff;
-  color: #333333;
+    background: LightGray;
+    margin: 0;
+    font-size: 1.5em;
+    text-align: center;
+    height: 100vh;
+
+    display: grid;
+    grid-gap: 10px;
+    
+    grid-template-areas:
+        "header"
+        "hero"
+        "body"
+        "footer"
 }
 
-img {
-  display: block;
-  max‑width: 100%;
-  height: auto;
-  margin: 1rem auto;
+/* Header section */
+header {
+    background: LightSkyBlue;
+    padding: 10px;
+    grid-area: header;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 10px;
+    grid-template-areas:
+        "brand brand"
+        "nav tools";
 }
 
-/* Layout wrapper */
-.site‑wrapper {
-  display: grid;
-  grid‑template‑areas:
-    "header"
-    "nav"
-    "main"
-    "ad"
-    "footer";
-  gap: 10px;
-  padding: 10px;
+header .brand {
+    background: rgb(69, 184, 255);
+    grid-area: brand;
 }
 
-.site‑header { grid‑area: header; text-align: center; padding: 20px 0; background: #f4f4f4; }
-.site‑nav    { grid‑area: nav; text-align: center; }
-.site‑main   { grid‑area: main; padding: 15px; }
-.site‑ad     { grid‑area: ad; background: #ffeb3b; text-align: center; padding: 15px; }
-.site‑footer { grid‑area: footer; text-align: center; padding: 10px; background: #333; color: #fff; }
-
-/* Navigation styling */
-.site‑nav ul {
-  list‑style: none;
-  padding: 0;
-  margin: 0;
-}
-.site‑nav li {
-  display: inline‑block;
-  margin: 0 10px;
-}
-.site‑nav a {
-  text‑decoration: none;
-  color: #333;
-  font‑weight: bold;
-}
-.site‑nav a:hover {
-  color: #4CAF50;
+header nav {
+    background: rgb(69, 184, 255);
+    grid-area: nav;
 }
 
-/* Button */
-.btn {
-  padding: 10px 20px;
-  background‑color: #4CAF50;
-  border: none;
-  color: #ffffff;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-.btn:hover {
-  transform: scale(1.1);
-  box‑shadow: 0 5px 15px rgba(0,0,0,0.3);
+header .tools {
+    background: rgb(69, 184, 255);
+    grid-area: tools;
 }
 
-/* Responsive – Tablet and above */
-@media (min‑width: 576px) {
-  .site‑wrapper {
-    grid‑template‑columns: 200px 1fr;
-    grid‑template‑areas:
-      "header header"
-      "nav main"
-      "nav ad"
-      "footer footer";
-  }
+/* Hero section */
+.hero {
+    background: PaleGreen;
+    padding: 10px;
+    grid-area: hero;
 
-  .site‑nav ul {
-    display: block; /* vertical nav for tablet+ */
-  }
-  .site‑nav li {
-    margin: 10px 0;
-  }
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 10px;
+    grid-template-areas:
+        "action";
 }
 
-/* Responsive – Desktop */
-@media (min‑width: 992px) {
-  .site‑wrapper {
-    grid‑template‑columns: 200px 1fr 200px;
-    grid‑template‑areas:
-      "header header header"
-      "nav main ad"
-      "footer footer footer";
-  }
+.hero .action {
+    background: rgb(68, 255, 68);
+    grid-area: action;
+}
+
+.hero .feature {
+    background: rgb(68, 255, 68);
+    grid-area: feature;
+}
+
+/* Body section */
+main {
+    background: lightpink;
+    padding: 10px;
+    grid-area: body;
+
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 10px;
+    grid-template-areas: 
+        "feature"
+        "ad"
+        "listing";
+}
+
+main .feature {
+    background: rgb(255, 136, 154);
+    grid-area: feature;
+}
+
+main .mobile-ad {
+    grid-area: ad;
+}
+
+main .listing {
+    background: rgb(255, 136, 154);
+    grid-area: listing;
+}
+
+/* Footer section */
+footer {
+    background: LightSalmon;
+    padding: 10px;
+    grid-area: footer;
+}
+
+/* Hide Sections which are not part of mobile */
+.desktop-ad {
+    grid-area: ad;
+    display: none;
+}
+
+.hero .feature {
+    display: none;
+}
+
+/* Sidebar section */
+.sidebar {
+    background: BlanchedAlmond;
+    padding: 10px;
+    grid-area: sidebar;
+
+    display: none;
+}
+
+.sidebar .feature {
+    background: rgb(255, 208, 136);
+    height: 100%;
+}
+
+/* Other */
+.mobile-ad img {
+    vertical-align: top;
+    width: 100%;
+}
+
+.desktop-ad img {
+    vertical-align: top;
+    width: 350px;
+}
+
+.mobile-ad:hover {
+    opacity: 0.5;
+}
+
+.desktop-ad:hover {
+    opacity: 0.5;
+}
+
+/* Tablet friendly layout */
+@media (min-width: 576px) {
+    body {
+        grid-template-rows: auto auto 1fr auto auto;
+        grid-template-areas:
+            "header"
+            "hero"
+            "body"
+            "sidebar"
+            "footer";
+    }
+
+    /* Change Header Layout */
+    header {
+        grid-template-columns: 1fr 2fr 1fr;
+        grid-template-areas:
+            "brand nav tools";
+    }
+
+    /* Change Hero Layout */
+    .hero {
+        grid-template-areas:
+            "feature"
+            "action";
+    }
+
+    .hero .feature {
+        display: block;
+    }
+
+    /* Change Body Layout */
+    main {
+        grid-template-columns: 1fr 200px;
+        grid-template-rows: auto 1fr;
+        grid-template-areas:
+            "feature ad"
+            "listing listing";
+    }
+
+    /* Change Sidebar Layout */
+    .sidebar {
+        display: grid;
+    }
+
+    .mobile-ad img {
+        width: 200px;
+    }
+}
+
+/* Desktop friendly layout */
+@media (min-width: 992px) {
+    body {
+        grid-template-columns: 1fr 350px;
+        grid-template-rows: auto auto 1fr auto;
+        grid-template-areas:
+            "header header"
+            "hero ad"
+            "body sidebar"
+            "footer footer"
+    }
+
+    /* Change Hero Layout */
+    .hero {
+        grid-template-columns: 2fr 1fr;
+        grid-template-areas:
+            "feature action"
+    }
+
+    /* Change Body Layout */
+    main {
+        grid-template-columns: 1fr 2fr;
+        grid-template-rows: 1fr;
+        grid-template-areas:
+            "feature listing"
+    }
+
+    .mobile-ad {
+        display: none;
+    }
+
+    .desktop-ad {
+        display: block;
+    }
 }
